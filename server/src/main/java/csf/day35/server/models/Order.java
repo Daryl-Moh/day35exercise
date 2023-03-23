@@ -54,20 +54,20 @@ public class Order {
             .build();
     }   
 
-    public static Order toOrder(String j) {
-        JsonReader reader = Json.createReader(new StringReader(j));
+    public static Order toOrder(String payload) {
+        JsonReader reader = Json.createReader(new StringReader(payload));
         return toOrder(reader.readObject());
     }
 
-    public static Order toOrder(JsonObject j) {
+    public static Order toOrder(JsonObject obj) {
         Order order = new Order();
-        if (j.containsKey("orderId") && (!j.isNull("orderId")))
-            order.setOrderId(j.getString("orderId"));
+        if (obj.containsKey("orderId") && (!obj.isNull("orderId")))
+            order.setOrderId(obj.getString("orderId"));
 
-        order.setName(j.getString("name"));
-        order.setEmail(j.getString("email"));
+        order.setName(obj.getString("name"));
+        order.setEmail(obj.getString("email"));
 
-        List<LineItem> lineItems = j.getJsonArray("lineItems").stream()
+        List<LineItem> lineItems = obj.getJsonArray("lineItems").stream()
             .map(i -> i.asJsonObject())
             .map(LineItem::toLineItem)
             .toList();
