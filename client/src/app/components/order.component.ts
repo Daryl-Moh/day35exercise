@@ -59,7 +59,7 @@ export class OrderComponent implements OnInit {
   private createLineItem(): FormGroup {
     return this.fb.group({
       item: this.fb.control<string>('', [ Validators.required ]),
-      quantity: this.fb.control<number>(1, [ Validators.required, Validators.min(1) ])
+      quantity: this.fb.control<number>(0, [ Validators.required, Validators.min(1) ])
     })
   }
 
